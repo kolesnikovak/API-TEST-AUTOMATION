@@ -1,0 +1,28 @@
+{
+  "name": "api-test-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "test:debug": "npx playwright test --debug",
+    "report": "npx playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kolesnikovak/API-TEST-AUTOMATION.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kolesnikovak/API-TEST-AUTOMATION/issues"
+  },
+  "homepage": "https://github.com/kolesnikovak/API-TEST-AUTOMATION#readme",
+  "dependencies": {
+    "@playwright/test": "^1.56.0",
+    "dotenv": "^17.2.3"
+  }
+}
