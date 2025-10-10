@@ -40,3 +40,16 @@ test('Get single post and code response API tests', async ({ request }) => {
 
     console.log('Post details:', responseJSON);
 });
+
+test('Get a comments for a post API tests', async ({ request }) => {
+    const postId = 5;
+    const response = await request.get(`${baseUrl}/posts/${postId}/comments`);
+
+    const status = response.status();
+    const responseJSON = await response.json();
+
+
+    for (let i = 0; i < responseJSON.length; i++) {
+        postSchema.parse(responseJSON[i]);
+    }
+});
