@@ -24,3 +24,19 @@ test('Get all posts API tests', async ({ request }) => {
 
     console.log('Number of posts:', responseJSON.length);
 });
+
+
+
+test('Get single post and code response API tests', async ({ request }) => {
+    const postId = 5;
+    const response = await request.get(`${baseUrl}/posts/${postId}`);
+
+    const status = response.status();
+    const responseJSON = await response.json();
+
+    expect(status).toBe(200);
+
+    postSchema.parse(responseJSON);
+
+    console.log('Post details:', responseJSON);
+});
