@@ -52,4 +52,39 @@ test('Get a comments for a post API tests', async ({ request }) => {
     for (let i = 0; i < responseJSON.length; i++) {
         postSchema.parse(responseJSON[i]);
     }
+
+    test('Get all posts with dynamic ID', async ({ request }) => {
+    const allPostsResponse = await request.get(`${baseUrl}/posts`);
+    const allPostsJSONResponse = await allPostsResponse.json();
+    
+    const postId = allPostsJSONResponse[0].id;
+   
+
+    const singlePostResponse = await request.get(`${baseUrl}/posts/${postId}`);
+    const singlePostJSONResponse = await singlePostResponse.json();
+
+    postSchema.parse(singlePostJSONResponse);
+    expect(singlePostResponse.status()).toBe(200);
+    console.log('Single Post details:', singlePostJSONResponse);
 });
+
+test ('Get post with userId and verify the expected user is correct', async ({request}) => {
+    const response = await request.get(`${baseUrl}/posts`);
+    const responseJSON = await response.json();
+
+    const userId = responseJSON[0].userId;
+
+    const postResponse = await request.get(`${baseUrl}/posts`, {
+        params: { userId: userId }
+    });
+    const postResponseJSON = await postResponse.json();
+
+    expect(postResponse.status()).toBe(200);
+
+    for (let i = 0; i < postResponseJSON.length; i++) {
+        postSchema.parse(postResponseJSON[i]);
+    }
+    console.log(`Posts for userId ${userId}:`, postResponseJSON);
+    })
+});
+
