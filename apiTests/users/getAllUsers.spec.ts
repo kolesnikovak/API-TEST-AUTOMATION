@@ -26,7 +26,7 @@ const userSchema = z.object({
     })
 });
 
-const baseUrl = process.env.baseUrl;
+const baseUrl = process.env.baseURL;
 
 test('Get all users API tests', async ({ request }) => {
     // get all users with https://jsonplaceholder.typicode.com/users
@@ -71,8 +71,8 @@ test('Validate status code and schema for single user', async ({ request }) => {
         }
     };
 
-    const createdUserResponse = await request.get(`${baseUrl}/users/${userRequestBody.id}`)
-    expect(createdUserResponse.status()).toBe(200)
+    const createdUserResponse = await request.post(`${baseUrl}/users`)
+    expect(createdUserResponse.status()).toBe(201)
 
     const expectedResponseSchema = z.object({
         id: z.literal(userRequestBody.id),
