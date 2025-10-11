@@ -1,5 +1,6 @@
 import {test, expect} from '@playwright/test';
 import z from 'zod';
+import { faker } from '@faker-js/faker';
 
 const postSchema = z.object({
     userId: z.number().int().positive().describe("ID of the user who created the post"),
@@ -8,7 +9,7 @@ const postSchema = z.object({
     body: z.string().min(1).max(5000).describe("Content body of the post")
 });
 
-const baseUrl = process.env.BASE_URL;
+const baseUrl = process.env.baseURL;
 
 test('Get all posts API tests', async ({ request }) => {
     const response = await request.get(`${baseUrl}/posts`);
@@ -85,6 +86,5 @@ test ('Get post with userId and verify the expected user is correct', async ({re
         postSchema.parse(postResponseJSON[i]);
     }
     console.log(`Posts for userId ${userId}:`, postResponseJSON);
-    })
-});
-
+})
+})
