@@ -20,6 +20,6 @@ test('Create a new todo', async ({ request }) => {
         completed: z.literal(newTodoRequestBody.completed)
     });
 
-    const actualResponseJSON = await response.json()
+    const actualResponseJSON = await createTodoResponse.json()
     expectedResponseSchema.parse(actualResponseJSON);
 });
